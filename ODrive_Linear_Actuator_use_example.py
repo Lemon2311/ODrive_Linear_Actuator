@@ -5,6 +5,7 @@ import time
 odrives = [odrive.find_any()] # find all connected odrives and make an array of odrives
 
 odrv0 = setup(odrives[0], 1) # setup first odrive, with automatic bounds detection and position control
+# with position check delta time of 1s
 
 time.sleep(2) # for testing purposes, wait for 2 second
 
