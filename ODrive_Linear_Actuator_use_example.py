@@ -4,12 +4,10 @@ import time
 
 odrives = [odrive.find_any()] # find all connected odrives and make an array of odrives
 
-odrv0 = setup(odrives[0], 1) # setup first odrive, with automatic bounds detection and position control
+odrv0 = setup(odrives[0], 0.5) # setup first odrive, with automatic bounds detection and position control
 # with position check delta time of 1s
 
-time.sleep(2) # for testing purposes, wait for 2 second
-
-move_in_procents(odrv0, 12.5, True, 0.01) # move first odrive to 12.5% of its bounds,
+move_in_procents(odrv0, 50, True, 0.01) # move first odrive to 50% of its bounds,
 # wait for position to be reached set to True, with 0.01 margin
 # wait for position to be reached set to True makes the function wait until the position is reached,
 # and then the function returns, and the code continues to execute

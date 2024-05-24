@@ -22,7 +22,8 @@ def bounds_detection_routine(odrive, delta_time=1):
     bound_left = None
     bound_right = None
 
-    odrive.axis0.controller.input_vel = 1
+    vel = 2
+    odrive.axis0.controller.input_vel = vel
 
     while True:
 
@@ -31,20 +32,23 @@ def bounds_detection_routine(odrive, delta_time=1):
         if(bound_right is None and check_position_delta(odrive, 0.1, delta_time)):
             odrive.axis0.controller.input_vel = 0
             bound_right = odrive.axis0.pos_estimate
-            odrive.axis0.controller.input_vel = -1
+            odrive.axis0.controller.input_vel = -vel
 
         if(bound_right is not None and check_position_delta(odrive, 0.1, delta_time)):
             odrive.axis0.controller.input_vel = 0
             bound_left = odrive.axis0.pos_estimate
             print(f"bound_left: {bound_left}; bound_right: {bound_right}")
             bounds[odrive.serial_number] = (bound_left, bound_right)
+            print(f"bounds: {bounds}")
             return odrive
 
 def setup_position_control(odrive):
     odrive.axis0.controller.config.control_mode = ControlMode.POSITION_CONTROL
+    print("Position control set")
     return odrive
 
 def move_in_procents(odrive, procent_from_start, await_position_reach=True, position_delta_margin=0.1):
+    print("Moving in procents...")
     bound_left, bound_right = bounds[odrive.serial_number]
     commanded_position = bound_left + (bound_right - bound_left) * procent_from_start / 100
     odrive.axis0.controller.input_pos = commanded_position
