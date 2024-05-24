@@ -5,7 +5,7 @@ import time
 odrives = [odrive.find_any()] # find all connected odrives and make an array of odrives
 
 odrv0 = setup(odrives[0], 0.5) # setup first odrive, with automatic bounds detection and position control
-# with position check delta time of 1s
+# with position check delta time of 0.5s
 
 move_in_procents(odrv0, 50, True, 0.01) # move first odrive to 50% of its bounds,
 # wait for position to be reached set to True, with 0.01 margin
