@@ -46,7 +46,4 @@ The All 3d models and variants & etcs folder is basically like a brain dump of m
 
 ## Testing
 
-Library is actively tested and on the 2 Axis Linear Actuator System, and will be updated as tests progress.
-
-## License
-This project is licensed under the [MIT License](link-to-license).
+Library is actively being tested on the 2 Axis Linear Actuator System, and will be updated as tests progress.
