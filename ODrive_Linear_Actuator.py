@@ -53,10 +53,13 @@ def move_in_procents(odrive, procent_from_start, await_position_reach=True, posi
     commanded_position = bound_left + (bound_right - bound_left) * procent_from_start / 100
     odrive.axis0.controller.input_pos = commanded_position
     
+    if( not await_position_reach ):
+        return commanded_position
+
     while await_position_reach:
         current_position = odrive.axis0.pos_estimate
         if abs(current_position - commanded_position) < position_delta_margin:
-            print(f"commanded_position: {commanded_position}")
+            print(f"commanded_position {commanded_position} reached")
             break
 
 def setup(odrive, bounds_detection_routine_delta_time = 1):
